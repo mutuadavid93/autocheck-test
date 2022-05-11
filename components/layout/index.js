@@ -1,4 +1,4 @@
-import MainBodySlider from "../MainBodySlider";
+
 import MainNav from "./MainNav";
 import SearchNav from "./SearchNav";
 import TheFooter from "./TheFooter";
@@ -10,7 +10,7 @@ export default function Layout({ children }) {
       <TopNav />
       <SearchNav />
       <MainNav />
-      <MainBodySlider />
+      
       <main className="yanga">{children}</main>
       <TheFooter />
     </>
