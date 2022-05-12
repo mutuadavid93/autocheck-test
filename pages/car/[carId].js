@@ -1,7 +1,27 @@
-import { useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import dynamic from "next/dynamic";
+import { useState, useRef, useEffect } from "react";
+import DamagedMedia from "../../components/DamagedMedia";
+const Carousel = dynamic(() => import("../../components/Carousel"), {
+  ssr: false
+});
 
-export default function CardDetails({ details }) {
-  // const [inspectionItems, setInspectionItems] = useState([]);
+export default function CardDetails({ details, carmedia }) {
+  const [categoryName, setCetegoryName] = useState("");
+  const [media, setMedia] = useState("");
+  const [inspectionItems, setInspectionItems] = useState([]);
+  const [result, setResult] = useState([]);
+  const [show, setShow] = useState(false);
+  const medianame = useRef(null);
+
+  useEffect(() => {
+    if (media) {
+      const item =
+        inspectionItems && inspectionItems.find((insp) => insp.name === media);
+      setResult(item);
+    }
+  }, [media, inspectionItems]);
+
   if (!details) return <p>Loading...</p>;
 
   const formatCurrency = (amount, currency = "KSh") => {
@@ -33,6 +53,46 @@ export default function CardDetails({ details }) {
 
   const currentPrice = formatCurrency(newPrice);
   const initialPrice = formatCurrency(oldPrice);
+
+  const handleCategoryChange = (event) => {
+    setCetegoryName(event.target.value);
+    // Update second dropdown
+    const mediaNames = details.damageMedia.find(
+      (m) => m.name === event.target.value
+    );
+    setShow(true); // show dropdown
+    setInspectionItems(mediaNames.inspectionItems);
+    setMedia(mediaNames.inspectionItems[0].name);
+  };
+
+  const handleInspectionChange = (event) => {
+    setMedia(event.target.value);
+    const item =
+      inspectionItems &&
+      inspectionItems.find((insp) => insp.name === event.target.value);
+    setResult(item);
+  };
+
+  let damage = null;
+  if (show) {
+    damage = (
+      <select
+        name="medianame"
+        id="medianame"
+        className="medianame"
+        onChange={handleInspectionChange}
+        value={media}
+        ref={medianame}
+      >
+        {inspectionItems.length &&
+          inspectionItems.map((ins, index) => (
+            <option value={ins.name} key={index}>
+              {ins.name}
+            </option>
+          ))}
+      </select>
+    );
+  }
 
   return (
     <>
@@ -84,7 +144,7 @@ export default function CardDetails({ details }) {
               <div className="product-single-w3l">
                 <ul className="mt-2">
                   <li className="mb-1">
-                    {bodyType.name} | {transmission} | {fuelType}
+                    {bodyType?.name} | {transmission} | {fuelType}
                   </li>
                   <li className="mb-1">{engineType} Engine</li>
                   <li className="mb-1">
@@ -113,59 +173,29 @@ export default function CardDetails({ details }) {
         <div className="container py-xl-4 py-lg-2">
           <h3 className="w3-head mb-2">Damaged Media</h3>
           <div className="faq-w3agile">
-            <ul className="faq pl-4">
-              {/* The Damage */}
-              {details.damageMedia.length &&
-                details.damageMedia.map((dm) => {
-                  return (
-                    <li className="item2 mt-3 pl-2" key={dm.name}>
-                      <a href="#" title="click here">
-                        {dm.name}
-                      </a>
-                      <ul>
-                        <li className="subitem1">
-                          {/* The Inspection */}
+            {/* First Dropdown */}
+            <select
+              name="categoryname"
+              id="categoryname"
+              className="mr-3"
+              onChange={handleCategoryChange}
+              value={categoryName}
+            >
+              <option value="">Choose media category</option>
+              {details?.damageMedia?.length &&
+                details.damageMedia.map((category) => (
+                  <option value={category.name} key={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+            </select>
+            {damage}
+            {/* Initial Layout */}
+            <DamagedMedia result={result} />
 
-                          <ul style={{ "listStyleType": "circle" }}>
-                            {dm.inspectionItems.map((ins) => {
-                              return (
-                                <li className="item1 mt-3 pl-2" key={ins.name}>
-                                  <a
-                                    href="#"
-                                    title="click here"
-                                    style={{ "textTransform": "capitalize" }}
-                                  >
-                                    {ins.name} | {ins.condition}
-                                  </a>
-                                  <ul>
-                                    <li className="subitem1">
-                                      <p>{ins.comment}</p>
+            <h3 className="w3-head my-2">Vehicle Media</h3>
 
-                                      <div className="damaged-media">
-                                        {ins.medias.map((media, index) => {
-                                          return (
-                                            <img
-                                              key={media.url + index}
-                                              src={media.url}
-                                              alt="..."
-                                              className="rounded"
-                                              width="200px"
-                                            />
-                                          );
-                                        })}
-                                      </div>
-                                    </li>
-                                  </ul>
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  );
-                })}
-            </ul>
+            <Carousel carmedia={carmedia} />
           </div>
         </div>
       </div>
@@ -180,8 +210,15 @@ export async function getStaticProps({ params }) {
     `https://api.staging.myautochek.com/v1/inventory/car/${carId}`
   );
   const details = await response.json();
+
+  // Fetch car media
+  const carMedia = await fetch(
+    `https://api-prod.autochek.africa/v1/inventory/car_media?carId=R1nVTV4Mj`
+  );
+  const carmedia = await carMedia.json();
+
   return {
-    props: { details }
+    props: { details, carmedia }
   };
 }
 

@@ -3214,3 +3214,11 @@ div#testimonials h4.m-title {
   grid: auto-flow min-content / repeat(12, 1fr);
   gap: 1em;
 }
+
+
+/* Slider */
+#media-slider .item-video {
+  /* height: 300px; */
+  width: 300px;
+}
+
