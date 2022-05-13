@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 export default function MainNav() {
   const router = useRouter();
 
-  const handleClick = (e) => {
+  const handleClick = (e, url) => {
     e.preventDefault();
-    router.push("/all-cars");
+    router.push(url);
   };
 
   return (
