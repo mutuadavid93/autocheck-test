@@ -1,4 +1,13 @@
+import { useRouter } from "next/router";
+
 export default function SearchNav() {
+  const router = useRouter();
+
+  const handleClick = (e, url) => {
+    e.preventDefault();
+    router.push(url);
+  };
+
   return (
     <div className="header-bot">
       <div className="container">
@@ -6,7 +15,11 @@ export default function SearchNav() {
           {/* <!-- logo --> */}
           <div className="col-md-3 logo_agile">
             <h1 className="text-center">
-              <a href="index.html" className="font-weight-bold font-italic">
+              <a
+                href="#"
+                onClick={(event) => handleClick(event, "/")}
+                className="font-weight-bold font-italic"
+              >
                 <img src="/images/logo2.png" alt=" " className="img-fluid" />
                 Auto Check
               </a>
