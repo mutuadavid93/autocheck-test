@@ -1,4 +1,3 @@
-
 import MainNav from "./MainNav";
 import SearchNav from "./SearchNav";
 import TheFooter from "./TheFooter";
@@ -10,7 +9,7 @@ export default function Layout({ children }) {
       <TopNav />
       <SearchNav />
       <MainNav />
-      
+
       <main className="yanga">{children}</main>
       <TheFooter />
     </>

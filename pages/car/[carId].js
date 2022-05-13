@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+
 import dynamic from "next/dynamic";
 import { useState, useRef, useEffect } from "react";
 import DamagedMedia from "../../components/DamagedMedia";
@@ -193,7 +194,7 @@ export default function CardDetails({ details, carmedia }) {
             {/* Initial Layout */}
             <DamagedMedia result={result} />
 
-            <h3 className="w3-head my-2">Vehicle Media</h3>
+            <h3 className="w3-head my-2">Sample Vehicle Media</h3>
 
             <Carousel carmedia={carmedia} />
           </div>
@@ -212,6 +213,7 @@ export async function getStaticProps({ params }) {
   const details = await response.json();
 
   // Fetch car media
+  // TODO:: Swicth car id to a dynamic one.
   const carMedia = await fetch(
     `https://api-prod.autochek.africa/v1/inventory/car_media?carId=R1nVTV4Mj`
   );

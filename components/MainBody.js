@@ -1,16 +1,11 @@
+import Link from "next/link";
 import CardItem from "./CardItem";
 
 export default function MainBody({ popularmakes }) {
   // console.log("---- ", popularmakes.makeList);
   return (
-    <div className="ads-grid py-sm-5 py-4">
+    <div className="ads-grid pb-sm-5 pb-4">
       <div className="container py-xl-4 py-lg-2">
-        {/* <!-- tittle heading --> */}
-        <h3 className="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-          <span>O</span>ur
-          <span>N</span>ew
-          <span>P</span>roducts
-        </h3>
         {/* <!-- //tittle heading --> */}
         <div className="row">
           {/* <!-- product left --> */}
@@ -32,9 +27,9 @@ export default function MainBody({ popularmakes }) {
                 </div>
 
                 {/* <div className="d-inline-flex"> */}
-                  <button className="button btn mt-5 auto-btn">
-                    List All Cars
-                  </button>
+                <Link href="/all-cars" className="button btn mt-5 auto-btn">
+                  List All Cars
+                </Link>
                 {/* </div> */}
               </div>
             </div>

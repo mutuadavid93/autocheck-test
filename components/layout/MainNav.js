@@ -1,4 +1,14 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
+import { useRouter } from "next/router";
+
 export default function MainNav() {
+  const router = useRouter();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    router.push("/all-cars");
+  };
+
   return (
     <div className="navbar-inner">
       <div className="container">
@@ -41,27 +51,30 @@ export default function MainNav() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto text-center mr-xl-5">
-              <li className="nav-item active mr-lg-2 mb-lg-0 mb-2">
-                <a className="nav-link" href="index.html">
+              <li
+                className="nav-item active mr-lg-2 mb-lg-0 mb-2"
+                style={{ cursor: "pointer" }}
+              >
+                <a
+                  className="nav-link"
+                  href="/"
+                  onClick={(event) => handleClick(event, "/")}
+                >
                   Home
                   <span className="sr-only">(current)</span>
                 </a>
               </li>
 
-              <li className="nav-item mr-lg-2 mb-lg-0 mb-2">
-                <a className="nav-link" href="about.html">
-                  About Us
-                </a>
-              </li>
-              <li className="nav-item mr-lg-2 mb-lg-0 mb-2">
-                <a className="nav-link" href="product.html">
-                  New Arrivals
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="contact.html">
-                  Contact Us
+              <li
+                className="nav-item mr-lg-2 mb-lg-0 mb-2"
+                style={{ cursor: "pointer" }}
+              >
+                <a
+                  className="nav-link"
+                  href="/all-cars"
+                  onClick={(event) => handleClick(event, "/all-cars")}
+                >
+                  List All Cars
                 </a>
               </li>
             </ul>

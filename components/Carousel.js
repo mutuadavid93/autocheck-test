@@ -1,45 +1,43 @@
-import dynamic from "next/dynamic";
-// const OwlCarousel = dynamic(import("react-owl-carousel"), {
-//   ssr: false
-// });
-
 import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.theme.default.css";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import ImageItem from "./ImageItem";
+import VideoItem from "./VideoItem";
+import Fancybox from "./FancyBox";
 
 export default function Carousel({ carmedia }) {
-  let mediaFile = null;
-  if (carmedia.hasOwnProperty("carMediaList")) {
-    const [mediaType] = carmedia.carMediaList[0].type.split("/");
-
-    if (mediaType == "video") {
-      console.log("--- VIDEO ");
-    } else {
-      console.log("--- IMAGE ");
-    }
-  }
-
-  if (!carmedia.hasOwnProperty("carMediaList")) return <p>Loading...</p>;
+  if (!carmedia.hasOwnProperty("carMediaList")) return <p>No Media Found</p>;
 
   return (
     <OwlCarousel
       loop={false}
-      rewind
-      margin={10}
-      lazyLoad
-      center
+      responsiveRefreshRate={0}
+      autoplay
+      autoplayTimeout={7000}
+      autoplayHoverPause
+      nav
+      navText={[
+        "<i class='fas fa-arrow-left'></i>",
+        "<i class='fas fa-arrow-right'></i>"
+      ]}
+      dots
+      margin={20}
       className="owl-carousel owl-theme"
       id="media-slider"
     >
-      {carmedia.carMediaList.map((li) => {
-        return (
-          <div className="item-video" key={li.id}>
-            <img
-              className="owl-lazy"
-              src="https://storage.googleapis.com/img.autochek.africa/a1dfa654-d52c-4931-89eb-33b72442aa7d-IMG.jpg"
-              alt=""
-            />
-          </div>
-        );
-      })}
+      {carmedia?.carMediaList &&
+        carmedia?.carMediaList?.map((item, i) => {
+          const [mediaType] = item.type.split("/");
+          return (
+            <Fancybox options={{ infinite: false }} key={item.id}>
+              {mediaType == "video" ? (
+                <VideoItem item={item} />
+              ) : (
+                <ImageItem item={item} />
+              )}
+            </Fancybox>
+          );
+        })}
     </OwlCarousel>
   );
 }

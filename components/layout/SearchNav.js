@@ -8,7 +8,7 @@ export default function SearchNav() {
             <h1 className="text-center">
               <a href="index.html" className="font-weight-bold font-italic">
                 <img src="/images/logo2.png" alt=" " className="img-fluid" />
-                Electro Store
+                Auto Check
               </a>
             </h1>
           </div>

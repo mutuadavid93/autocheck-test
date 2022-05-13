@@ -323,7 +323,7 @@ ul.multi-column-dropdown li a:hover {
 /*-- carousel-slider --*/
 
 .carousel-item.item1 {
-  background: url(../../public/images/b1.jpg) no-repeat center;
+  background: url(../../public/images/banner2.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -332,7 +332,7 @@ ul.multi-column-dropdown li a:hover {
 }
 
 .carousel-item.item2 {
-  background: url(../../public/images/b2.jpg) no-repeat center;
+  background: url(../../public/images/banner2.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -341,7 +341,7 @@ ul.multi-column-dropdown li a:hover {
 }
 
 .carousel-item.item3 {
-  background: url(../../public/images/b3.jpg) no-repeat center;
+  background: url(../../public/images/banner2.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -350,7 +350,7 @@ ul.multi-column-dropdown li a:hover {
 }
 
 .carousel-item.item4 {
-  background: url(../../public/images/b4.jpg) no-repeat center;
+  background: url(../../public/images/banner2.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -1318,7 +1318,7 @@ h2.footer-top-head-w3l {
 /*-- inner pages --*/
 
 .page-head_agile_info_w3l {
-  background: url(../../public/images/b1.jpg) no-repeat center;
+  background: url(../../public/images/banner2.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -1328,7 +1328,7 @@ h2.footer-top-head-w3l {
 }
 
 .page-head_agile_info_w3l-2 {
-  background: url(../../public/images/b3.jpg) no-repeat center;
+  background: url(../../public/images/banner2.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
