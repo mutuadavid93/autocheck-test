@@ -1,7 +1,7 @@
 import AllCarsList from "../components/AllCarsList";
 
 export default function AllCars({ allCars }) {
-  console.log("---- all cars ... ", allCars);
+  if (!allCars) return <p>Loading...</p>;
   return (
     <>
       <div className="page-head_agile_info_w3l page-head_agile_info_w3l-2"></div>
