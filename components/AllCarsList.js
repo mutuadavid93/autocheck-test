@@ -1,15 +1,11 @@
 import CarItem from "./CarItem";
 
 export default function AllCarsList({ allcars }) {
-  // console.log("--- ", allcars);
+  if (!allcars) return <p>Loading...</p>;
+
   return (
     <div className="ads-grid  py-sm-5 py-4">
       <div className="container py-xl-4 py-lg-2">
-        <h3 className="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-          <span>T</span>v<span>&</span>
-          <span>A</span>ppliances
-        </h3>
-
         <div className="row">
           <div className="agileinfo-ads-display col-lg-12">
             <div className="wrapper">
@@ -19,7 +15,7 @@ export default function AllCarsList({ allcars }) {
                   Car Catalogue
                 </h3>
                 <div className="row">
-                  {allcars.result.map((car) => (
+                  {allcars?.result && allcars?.result?.map((car) => (
                     <CarItem car={car} key={car.id} />
                   ))}
                 </div>
