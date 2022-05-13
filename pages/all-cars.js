@@ -24,7 +24,7 @@ export default function AllCars({ allCars }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const response = await fetch(
     "https://api.staging.myautochek.com/v1/inventory/car/search"
   );

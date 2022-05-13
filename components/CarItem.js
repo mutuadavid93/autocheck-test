@@ -20,13 +20,15 @@ export default function CarItem({ car }) {
   return (
     <div className="col-md-4 product-men mt-5">
       <div className="men-pro-item simpleCart_shelfItem">
-        <div className="men-thumb-item text-center">
-          <img
-            src={image}
-            alt={title.toUpperCase() + " PICTURE"}
-            className="fit-images"
-          />
-        </div>
+        <Link href={`/car/${id}`}>
+          <div className="men-thumb-item text-center">
+            <img
+              src={image}
+              alt={title.toUpperCase() + " PICTURE"}
+              className="fit-images"
+            />
+          </div>
+        </Link>
         <div className="item-info-product text-center border-top mt-4">
           <h4 className="pt-1">
             <a href="single.html">{title}</a>
